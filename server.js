@@ -3,17 +3,18 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 
+require("dotenv").config();
+
 // Number of salt rounds
 const saltRounds = 10;
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const uri =
-  "mongodb+srv://priyanshug02:tdiCicyeliaKEPAo@cluster0.5qvpygy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-const dbName = "main";
+const uri = process.env.MONGODB_URI;
+const dbName = process.env.DB_NAME || "main";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.text());
@@ -140,12 +141,20 @@ startServer().catch((err) => {
   process.exit(1);
 });
 
-// Graceful shutdown
-process.on("SIGINT", async () => {
-  console.log("Shutting down server...");
+async function gracefulShutdown() {
+  console.log('Shutting down server...');
 
   await client.close();
-  console.log("MongoDB connection closed");
-
+  console.log('MongoDB connection closed');
+  
   process.exit(0);
-});
+
+  // Should not be reached
+  setTimeout(() => {
+    console.error('Could not close connections in time, forcefully shutting down');
+    process.exit(1);
+  }, 5000);
+}
+
+process.on('SIGTERM', gracefulShutdown);
+process.on('SIGINT', gracefulShutdown);
