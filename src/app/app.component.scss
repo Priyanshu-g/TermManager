@@ -1,0 +1,42 @@
+.drag-scroll-container {
+  position: relative;
+  overflow: hidden; /* Hide overflow to enable the fade effect */
+}
+
+.drag-scroll-container::before {
+  z-index: 1;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px; /* Adjust the width as needed */
+  pointer-events: none; /* Allow interactions with the content underneath */
+}
+
+.drag-scroll-container::after {
+  z-index: 1;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px; /* Adjust the width as needed */
+  pointer-events: none; /* Allow interactions with the content underneath */
+}
+
+.drag-scroll-container::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.drag-scroll-container::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
+}

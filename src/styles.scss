@@ -1,1 +1,95 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/mdc-light-indigo/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html, body { height: 100%; }
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    height: 100%;
+    margin: 0;
+    flex-direction: column;
+    display: flex;
+}
+
+.earn{
+    color: #77DD77;
+}
+
+.need{
+    color: #FF6961;
+}
+
+.zero{
+    padding: 0;
+    margin: 0;
+}
+
+.font-semibold{
+    font-weight: 600;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.justify-content-end {
+    justify-content: end;
+}
+
+td {
+    text-align: center;
+}
+
+.center-checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.w-6rem{
+    width: 6rem;
+}
+
+.pill{
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.justify-content-center{
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.gap{
+    gap: 10px;
+}
+
+.large-gap{
+    gap: 20px;
+}
+
+.minor-caption{
+    font-size: 12px;
+    padding-top: 4px;
+    opacity: 0.6;
+}
+
+.min-height{
+    min-height: 50rem;
+}
