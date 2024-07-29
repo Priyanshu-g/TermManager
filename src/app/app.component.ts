@@ -30,7 +30,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ApiService } from './parts/api/api.service';
 import { HttpClientModule } from '@angular/common/http';
-import { environment } from './environment';
+import { environment } from '../environments/environment';
 
 function disableAllControls(formGroup: FormGroup): void {
   Object.keys(formGroup.controls).forEach((key) => {
@@ -337,6 +337,7 @@ export class AppComponent implements OnInit, OnDestroy {
   });
 
   login() {
+    console.log(environment.apiUrl);
     if(!this.waitingLogIn){
       this.waitingLogIn = true;
       this.apiService
