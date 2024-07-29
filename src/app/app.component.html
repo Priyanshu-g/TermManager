@@ -39,7 +39,7 @@
               @if(!waitingCreateAcc){
               <p-button
                 label="Create Account"
-                [disabled]="loginForm.invalid"
+                [disabled]="loginForm.invalid || waitingLogIn"
                 (onClick)="createAcc()"
                 outlined="true"
               />
@@ -55,7 +55,7 @@
               @if(!waitingLogIn){
               <p-button
                 label="Login"
-                [disabled]="loginForm.invalid"
+                [disabled]="loginForm.invalid || waitingCreateAcc"
                 (onClick)="login()"
                 outlined="true"
                 type="submit"
