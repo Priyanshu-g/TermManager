@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private loginUrl = 'http://localhost:3000/login';
-  private createUrl = 'http://localhost:3000/create';
-  private updateUrl = 'http://localhost:3000/update';
+  private loginUrl = 'http://localhost:8080/login';
+  private createUrl = 'http://localhost:8080/create';
+  private updateUrl = 'http://localhost:8080/update';
 
   constructor(private http: HttpClient) { }
 

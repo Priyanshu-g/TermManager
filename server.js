@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path');
 const bcrypt = require("bcrypt");
 
 require("dotenv").config();
@@ -14,11 +15,13 @@ const uri = process.env.MONGODB_URI;
 const dbName = process.env.DB_NAME || "main";
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(cors());
+// Serve static files from the Angular build directory
+app.use(express.static(path.join(__dirname, 'dist', 'term-manager', 'browser')));
 
 // GET endpoint to retrieve data
 // app.get("/api/data", (req, res) => {
@@ -158,3 +161,8 @@ async function gracefulShutdown() {
 
 process.on('SIGTERM', gracefulShutdown);
 process.on('SIGINT', gracefulShutdown);
+
+// Handle all routes to serve the Angular app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'term-manager', 'browser', 'index.html'));
+});

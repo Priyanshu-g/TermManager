@@ -246,11 +246,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Consider checking the new type of visibility, e.g. 'hidden'
     document.addEventListener('visibilitychange', () => {
-      navigator.sendBeacon('http://localhost:3000/update', JSON.stringify({
-        user: this.loginForm.value.username,
-        tasks: this.tasks,
-        classes: this.classes,
-      }));
+      if(document.visibilityState === 'hidden'){
+        navigator.sendBeacon('http://localhost:8080/update', JSON.stringify({
+          user: this.loginForm.value.username,
+          tasks: this.tasks,
+          classes: this.classes,
+        }));
+      }
     });
   }
 
