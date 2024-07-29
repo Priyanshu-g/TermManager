@@ -121,8 +121,13 @@ app.post("/update", async (req, res) => {
   console.log("Update successful");
 });
 
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Server is running on http://localhost:${port}`);
+  await startServer().catch((err) => {
+    console.error("Failed to start server:", err);
+    process.exit(1);
+  });
+  console.log("Server started");
 });
 
 async function connectToMongoDB() {
@@ -138,11 +143,6 @@ async function connectToMongoDB() {
 async function startServer() {
   await connectToMongoDB();
 }
-
-startServer().catch((err) => {
-  console.error("Failed to start server:", err);
-  process.exit(1);
-});
 
 async function gracefulShutdown() {
   console.log('Shutting down server...');
