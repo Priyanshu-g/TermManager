@@ -8,7 +8,7 @@
       [(visible)]="loggingIn"
       [style]="{ width: '25rem' }"
     >
-      <div class="minor-caption" *ngIf="loginErrorMessage.length">
+      <div class="minor-caption" *ngIf="loginErrorMessage !== ''">
         {{ loginErrorMessage }}
       </div>
       <form [formGroup]="loginForm" (ngSubmit)="login()">

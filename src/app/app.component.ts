@@ -30,6 +30,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ApiService } from './parts/api/api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from './environment';
 
 function disableAllControls(formGroup: FormGroup): void {
   Object.keys(formGroup.controls).forEach((key) => {
@@ -245,9 +246,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.initialValues = this.assignmentForm.value;
 
     // Consider checking the new type of visibility, e.g. 'hidden'
+
+    // If env variable is set to production, https://termmanager-5v22vijyea-uc.a.run.app will be used else http://localhost:8080
     document.addEventListener('visibilitychange', () => {
       if(document.visibilityState === 'hidden'){
-        navigator.sendBeacon('http://localhost:8080/update', JSON.stringify({
+        navigator.sendBeacon(environment.apiUrl + '/update', JSON.stringify({
           user: this.loginForm.value.username,
           tasks: this.tasks,
           classes: this.classes,
